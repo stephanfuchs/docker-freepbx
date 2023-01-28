@@ -2,7 +2,7 @@ FROM tiredofit/debian:buster
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ### Set defaults
-ENV ASTERISK_VERSION=17.9.4 \
+ENV ASTERISK_VERSION=18.15.1 \
     BCG729_VERSION=1.0.4 \
     DONGLE_VERSION=20200610 \
     G72X_CPUHOST=penryn \
@@ -160,7 +160,8 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
                     uuid \
                     wget \
                     whois \
-                    xmlstarlet && \
+                    xmlstarlet \
+                    usb-modeswitch && \
     \
 ### Add users
     addgroup --gid 2600 asterisk && \
@@ -248,15 +249,17 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
     make install && \
     \
 #### Add USB Dongle support
-    git clone https://github.com/rusxakep/asterisk-chan-dongle /usr/src/asterisk-chan-dongle && \
+    git clone https://github.com/wdoekes/asterisk-chan-dongle /usr/src/asterisk-chan-dongle && \
     cd /usr/src/asterisk-chan-dongle && \
     git checkout tags/$DONGLE_VERSION && \
     ./bootstrap && \
-    ./configure --with-astversion=$ASTERISK_VERSION && \
+    ./configure --with-astversion=$ASTERISK_VERSION --with-asterisk=/usr/src/asterisk/include && \
     make && \
     make install && \
     \
     ldconfig && \
+    \
+    echo 'KERNEL=="ttyUSB*", GROUP="dialout", OWNER="asterisk"' > /etc/udev/rules.d/50-udev-default.rules && \
     \
 ### Cleanup
     mkdir -p /var/run/fail2ban && \
