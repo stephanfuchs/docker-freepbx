@@ -258,8 +258,8 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
     \
     ldconfig && \
     \
-    echo 'KERNEL=="ttyUSB*", GROUP="dialout", OWNER="asterisk"' > /etc/udev/rules.d/50-udev-default.rules && \
-    \
+    # echo 'KERNEL=="ttyUSB*", GROUP="dialout", OWNER="asterisk"' > /etc/udev/rules.d/50-udev-default.rules && \
+    # \
 ### Cleanup
     mkdir -p /var/run/fail2ban && \
     cd / && \
