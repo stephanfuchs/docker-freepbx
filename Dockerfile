@@ -251,7 +251,6 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
 #### Add USB Dongle support
     git clone https://github.com/wdoekes/asterisk-chan-dongle /usr/src/asterisk-chan-dongle && \
     cd /usr/src/asterisk-chan-dongle && \
-    git checkout tags/$DONGLE_VERSION && \
     ./bootstrap && \
     ./configure --with-astversion=$ASTERISK_VERSION --with-asterisk=/usr/src/asterisk/include && \
     make && \
