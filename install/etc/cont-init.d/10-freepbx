@@ -220,10 +220,12 @@ EOF
     check_process
     silent fwconsole ma install cdr
   fi
-
-  print_notice "- backup, callrecording, conferences, dashboard, featurecodeadmin, filestore, fw_langpacks, infoservices, languages, logfiles, music, recordings, sipsettings, soundlang, voicemail"
+  print_notice "- disablerepo commercial"
   check_process
-  silent fwconsole ma downloadinstall backup callrecording conferences dashboard featurecodeadmin filestore fw_langpacks infoservices languages logfiles music recordings sipsettings soundlang voicemail
+  fwconsole ma disablerepo commercial
+  print_notice "- backup, callrecording, conferences, dashboard, featurecodeadmin, filestore, fw_langpacks, infoservices, languages, logfiles, music, recordings, sipsettings, soundlang, voicemail, customappsreg"
+  check_process
+  silent fwconsole ma downloadinstall backup callrecording conferences dashboard featurecodeadmin filestore fw_langpacks infoservices languages logfiles music recordings sipsettings soundlang voicemail customappsreg
   print_notice "- certman, userman, pm2"
   check_process
   silent fwconsole ma downloadinstall certman userman pm2
