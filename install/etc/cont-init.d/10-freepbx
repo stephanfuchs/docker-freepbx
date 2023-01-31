@@ -112,7 +112,7 @@ extensions = {
 EOF
   fi
 
-  if [ ! -f /etc/asterisk/dongle.conf ]; then
+  if [ ! -s /etc/asterisk/dongle.conf ]; then
     mkdir -p /var/lib/asterisk/smsdb
     chown -RH asterisk. /var/lib/asterisk/smsdb
 
